@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>To do app</h1>
+    <input type="text" />
+    <ul>
+      <script>
+        var myInput = document.getElementsByTagName("input")[0];
+
+        myInput.onkeydown = function (event) {
+          var event = event || window.event;
+          if (event.keyCode == 13) {
+            var data = this.value;
+            addData(data);
+            myInput.value = "";
+          }
+        };
+
+        //添加数据功能
+        function addData(data) {
+          var tempLi = document.createElement("li");
+
+          var tempSpan = document.createElement("span");
+          tempSpan.innerHTML = data;
+          tempLi.appendChild(tempSpan);
+
+          var tempBtn = document.createElement("button");
+          tempBtn.innerHTML = "delete";
+          tempBtn.name = "delete";
+          tempLi.appendChild(tempBtn);
+
+          var oUl = document.getElementsByTagName("ul")[0];
+          oUl.appendChild(tempLi);
+        }
+
+        // 点击删除
+        var oUl = document.getElementsByTagName("ul")[0];
+        oUl.onclick = function (event) {
+          var event = event || window.event;
+          var target = event.target;
+
+          if (target.name == "delete") {
+            target.parentNode.parentNode.removeChild(target.parentNode);
+          }
+        };
+      </script>
+    </ul>
+  </body>
+</html>
